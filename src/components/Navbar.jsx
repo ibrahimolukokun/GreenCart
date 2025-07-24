@@ -45,7 +45,10 @@ const Navbar = () => {
           </button>
         </div>
 
-        {!user ? ( <button onClick={()=> setShowUserLogin(true)} className="cursor-pointer px-8 py-2 bg-primary hover:bg-primary-dull transition text-white rounded-full">
+        {!user ? ( 
+          <button 
+          onClick={() => setShowUserLogin(true)} 
+          className="cursor-pointer px-8 py-2 bg-primary hover:bg-primary-dull transition text-white rounded-full">
           Login
         </button>)
         :
@@ -74,7 +77,7 @@ const Navbar = () => {
         <div
           className={`${
             open ? "flex" : "hidden"
-          } absolute top-[60px] left-0 w-full bg-white shadow-md py-4 flex-col items-start gap-2 px-5 text-sm md:hidden`}
+          } absolute top-[60px] left-0 w-full bg-white shadow-md py-4 flex-col items-start gap-2 px-5 text-sm md:hidden z-10`}
         >
           <NavLink to="/" onClick={() => setOpen(false)}>
             Home
