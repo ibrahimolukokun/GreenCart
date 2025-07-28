@@ -4,19 +4,19 @@ import ProductCard from '../components/ProductCard';
 
 const AllProducts = () => {
 
-    const { products, seacrhQuery } = useAppContext();
+    const { products, searchQuery } = useAppContext();
     const [filteredProducts, setFilteredProducts] = useState([]);
 
     useEffect(()=> {
-        if (seacrhQuery.length > 0) {
+        if (searchQuery.length > 0) {
             setFilteredProducts(products.filter(
-                product => product.name.toLowerCase().includes(seacrhQuery.toLowerCase())
+                product => product.name.toLowerCase().includes(searchQuery.toLowerCase())
             ))
         } else {
             setFilteredProducts(products);
         }
 
-    },[ products, seacrhQuery])
+    },[ products, searchQuery])
 
   return (
     <div className='mt-6 felx flex-col'>
