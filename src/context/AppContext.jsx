@@ -46,13 +46,14 @@ export const AppContextProvider = ({children}) => {
     }
 
     //Remove Product to cart
-    const removeFromCart = (itemId)=>{
+    const removeFromCart = (itemId) => {
         let cartData = structuredClone(cartItems);
 
         if (cartData[itemId]){
             cartData[itemId] -= 1 ;
-        } else {
-            cartData[itemId] = 0;
+            if (cartData[itemId] === 0) {
+                delete cartData[itemId];
+            }
         }
         setCartItems(cartData);
         toast.success("Removed from Cart")
@@ -73,7 +74,7 @@ export const AppContextProvider = ({children}) => {
         for (const items in cartItems){
             let itemInfo = products.find((product)=> product._id === items);
             if(cartItems[items] > 0){
-                totalAmount =+ (itemInfo.offerPrice * cartItems[items]);
+                totalAmount += (itemInfo.offerPrice * cartItems[items]);
             }
         }
         return Math.floor(totalAmount * 100) / 100; // Round to 2 decimal places
