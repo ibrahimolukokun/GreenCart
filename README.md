@@ -8,22 +8,23 @@ This application includes all core features of a commercial web platform—from 
 
 ## ⚙️ Features
 
-- 🛒 Customer-Facing Pages
+**🛒 Customer-Facing Pages** 
 
-Landing Page: Engaging homepage with featured products and categories.
+- Landing Page: Engaging homepage with featured products and categories.
 
-Product Details: Dynamic product pages with pricing, descriptions, and image galleries.
+- Product Details: Dynamic product pages with pricing, descriptions, and image galleries.
 
-Cart & Checkout: Add-to-cart flow, order summary, and responsive checkout page.
+- Cart & Checkout: Add-to-cart flow, order summary, and responsive checkout page.
 
-Order Tracking: View order history and status updates.
+- Order Tracking: View order history and status updates.
 
-- 🧑‍💼 Seller/Admin Dashboard
-Add/Edit Products: Create and manage product listings with image uploads and price configurations.
+**🧑‍💼 Seller/Admin Dashboard**
 
-Order Management: View and manage customer orders with status control.
+- Add/Edit Products: Create and manage product listings with image uploads and price configurations.
 
-Inventory Overview: Track stock availability and product performance.
+- Order Management: View and manage customer orders with status control.
+
+- Inventory Overview: Track stock availability and product performance.
 
 ## 💡 Tech Stack
 
