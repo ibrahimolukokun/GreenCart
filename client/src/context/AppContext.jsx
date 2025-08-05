@@ -17,7 +17,7 @@ export const AppContextProvider = ({children}) => {
     const [user, setUser] = useState(null);
     const [isSeller, setIsSeller] = useState(false);
     const [showUserLogin, setShowUserLogin] = useState(false);
-    const [products, setProducts] = useState([])
+    const [products, setProducts] = useState([]);
 
 
     const [cartItems, setCartItems] = useState({});
@@ -34,6 +34,19 @@ export const AppContextProvider = ({children}) => {
             }
         } catch (error) {
             setIsSeller(false);
+        }
+    }
+
+    // Fetch User Status, User Data and Cart Items
+    const fetchUser = async () => {
+        try {
+            const {data} = await axios.get('/api/user/is-auth');
+            if (data.success) {
+                setUser(data.user);
+                setCartItems(data.user.cartItems);
+        }
+    } catch (error) {
+            setUser(null);
         }
     }
 
@@ -55,7 +68,7 @@ export const AppContextProvider = ({children}) => {
     const addToCart = (itemId)=>{
         let cartData = structuredClone(cartItems);
 
-        if (cartData[itemId]){
+        if(cartData[itemId]){
             cartData[itemId] += 1 ;
         } else {
             cartData[itemId] = 1;
@@ -110,10 +123,29 @@ export const AppContextProvider = ({children}) => {
 
     useEffect(()=>{
         fetchSeller();
-        fetchProducts()
+        fetchProducts();
+        fetchUser();
     }, [])
 
-    const value ={navigate, user, setUser, isSeller, setIsSeller, showUserLogin, setShowUserLogin, products, setProducts, currency, addToCart, updateCartItem, removeFromCart, cartItems, searchQuery, setSearchQuery, getCartAmount, getCartCount, axios, fetchProducts};
+    //Update Database Cart Items
+    useEffect(()=>{
+        const updateCart = async () => {
+                try {
+                    const {data} = await axios.post('/api/cart/update', {cartItems});
+                    if (!data.success) {
+                        toast.error(data.message)
+                    }
+                } catch (error) {
+                    toast.error(error.message)
+                }
+            }
+            if(user) {
+                updateCart();
+            }
+    }, [cartItems, user]);
+    
+
+    const value ={navigate, user, setUser, isSeller, setIsSeller, showUserLogin, setShowUserLogin, products, setProducts, currency, addToCart, updateCartItem, removeFromCart, cartItems, setCartItems, searchQuery, setSearchQuery, getCartAmount, getCartCount, axios, fetchProducts};
 
     return <AppContext.Provider value={value}>
         {children}
